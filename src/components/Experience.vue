@@ -1,0 +1,59 @@
+<template>
+	<section>
+		<div class="container">
+			<h3 class="section-title">Experience</h3>
+			<ul class="tags-wrapper">
+				<li class="tag" v-for="tag in techList" :key="tag">{{ tag }}</li>
+			</ul>
+		</div>
+	</section>
+</template>
+
+<script>
+export default {
+	name: 'Experience',
+	data() {
+		return {
+			techList: [
+				'HTML',
+				'CSS',
+				'JavaScript',
+				'React',
+				'React-Redux',
+				'Vue',
+				'TypeScript',
+				'Nodejs',
+				'Express',
+				'MongoDB',
+				'Mongoose',
+				'Tailwind',
+			],
+		}
+	},
+}
+</script>
+
+<style>
+.tags-wrapper {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	list-style-type: none;
+}
+
+.tag {
+	cursor: default;
+	margin: 20px 10px;
+	background-color: var(--color-4);
+	color: var(--color-1);
+	font-size: 2.5rem;
+	padding: 1rem;
+	border-radius: 20px;
+	transition: transform ease-in-out 0.2s;
+}
+
+.tag:hover {
+	transform: translateY(-10px);
+	color: var(--color-2);
+}
+</style>

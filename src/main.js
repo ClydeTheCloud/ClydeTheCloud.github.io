@@ -1,4 +1,10 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 
-createApp(App).mount('#app')
+import language from './utils/languageSwitch'
+
+const app = createApp(App)
+
+app.config.globalProperties.$language = language
+
+app.mount('#app')
