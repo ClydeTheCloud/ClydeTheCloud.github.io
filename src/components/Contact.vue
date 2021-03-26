@@ -6,6 +6,7 @@
 				{{ $t('title') }}
 			</h3>
 			<form>
+				<!-- TODO add jsmail -->
 				<label>
 					{{ $t('form.name') }} <br />
 					<input type="text" />

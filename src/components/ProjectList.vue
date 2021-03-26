@@ -22,12 +22,16 @@ export default {
 	data() {
 		return {
 			list: null,
+			isLoading: true,
 		}
 	},
+	//TODO add try/catch for errors
+	//TODO skeleton loader
 	async mounted() {
 		const res = await fetch('https://my-json-server.typicode.com/clydethecloud/portfolio-db-mock/db')
 		const data = await res.json()
 		this.list = data.data
+		this.isLoading = false
 	},
 }
 </script>
