@@ -1,26 +1,18 @@
 <template>
 	<Header />
-	<About />
-	<MostRecentProject />
-	<Experience />
-	<Footer />
+	<LanguageSwitcher />
+	<router-view />
 </template>
 
 <script>
 import Header from './components/Header'
-import About from './components/About'
-import MostRecentProject from './components/MostRecentProject'
-import Experience from './components/Experience'
-import Footer from './components/Footer'
+import LanguageSwitcher from './components/LanguageSwitcher'
 
 export default {
 	name: 'App',
 	components: {
 		Header,
-		About,
-		MostRecentProject,
-		Experience,
-		Footer,
+		LanguageSwitcher,
 	},
 }
 </script>
@@ -45,6 +37,10 @@ body {
 	color: var(--color-5);
 }
 
+a {
+	color: inherit;
+}
+
 .container {
 	width: 1000px;
 	margin: 0 auto;
@@ -53,5 +49,17 @@ body {
 
 .hidden {
 	visibility: hidden;
+	position: absolute;
+	clip: rect(0 0 0 0);
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+}
+
+.section-title {
+	margin: 6rem 0;
+	text-align: center;
+	font-weight: bold;
+	font-size: 3em;
 }
 </style>

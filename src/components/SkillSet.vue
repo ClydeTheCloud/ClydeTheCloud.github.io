@@ -1,7 +1,7 @@
 <template>
 	<section>
 		<div class="container">
-			<h3 class="section-title">Experience</h3>
+			<h3 class="section-title">{{ $t('title') }}</h3>
 			<ul class="tags-wrapper">
 				<li class="tag" v-for="tag in techList" :key="tag">{{ tag }}</li>
 			</ul>
@@ -32,6 +32,17 @@ export default {
 	},
 }
 </script>
+
+<i18n>
+{
+	"en": {
+		"title": "Skill set"
+	},
+	"ru": {
+		"title": "Мои навыки"
+	},
+}
+</i18n>
 
 <style>
 .tags-wrapper {

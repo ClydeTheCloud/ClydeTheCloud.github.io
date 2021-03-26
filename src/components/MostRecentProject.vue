@@ -1,8 +1,8 @@
 <template>
 	<section>
 		<div class="container">
-			<h3 class="section-title">Most Recent Project:</h3>
-			<ProjectCard :title="title" :img="img" :description="description" :links="links" />
+			<h3 class="section-title">{{ $t('title') }}</h3>
+			<ProjectCard :title="title[this.$i18n.locale]" :img="img" :description="description[this.$i18n.locale]" :links="links" />
 		</div>
 	</section>
 </template>
@@ -13,25 +13,36 @@ export default {
 	name: 'MostRecentProject',
 	data() {
 		return {
-			title: 'Test',
+			title: {
+				ru: 'Название',
+				en: 'Title',
+			},
 			img: 'https://clydethecloud.github.io/img/undertool-preview.png',
-			description:
-				'Description about a project I have made, maybe even what stack I used and technology implemented inside said project',
+			description: { ru: 'Описание проекта на русском языке', en: 'English description of a project' },
 			links: [
 				{
 					url: 'https://clydethecloud.github.io/',
 					type: 'github',
-					description: 'Github',
+					description: {
+						ru: 'Репозиторий',
+						en: 'GitHub',
+					},
 				},
 				{
 					url: 'https://clydethecloud.github.io/',
 					type: 'site',
-					description: 'Site',
+					description: {
+						ru: 'Сайт',
+						en: 'Site',
+					},
 				},
 				{
 					url: 'https://clydethecloud.github.io/',
 					type: 'site',
-					description: 'Site',
+					description: {
+						ru: 'Сайт',
+						en: 'Site',
+					},
 				},
 			],
 		}
@@ -41,3 +52,15 @@ export default {
 	},
 }
 </script>
+
+<i18n>
+{
+	"en": {
+		"title": "Most Recent Project",
+	},
+	"ru": {
+		"title": "Предыдущий проект",
+
+	}
+}
+</i18n>

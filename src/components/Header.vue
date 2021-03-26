@@ -1,22 +1,30 @@
 <template>
-	<header>
+	<header :class="{ minimized: isMinimized() }">
 		<div class="title-container">
 			<h2 class="header-title left">
-				Aleksandr
+				{{ $t('firstName') }}
 			</h2>
 		</div>
 		<div class="container header-wrapper">
 			<img class="header-logo" src="../assets/logo.svg" alt="Logo" />
 
 			<nav class="header-links">
-				<div class="header-link-item header-link-active"><router-link>About me</router-link></div>
-				<div class="header-link-item"><router-link>Projects</router-link></div>
-				<div class="header-link-item"><router-link>Contact</router-link></div>
+				<router-link to="/" class="header-link-item" :class="{ 'header-link-active': isActive('/') }"
+					>{{ $t('nav.about') }}
+				</router-link>
+
+				<router-link to="/projects" class="header-link-item" :class="{ 'header-link-active': isActive('/projects') }">{{
+					$t('nav.projects')
+				}}</router-link>
+
+				<router-link to="/contact" class="header-link-item" :class="{ 'header-link-active': isActive('/contact') }">{{
+					$t('nav.contact')
+				}}</router-link>
 			</nav>
 		</div>
 		<div class="title-container">
 			<h2 class="header-title right">
-				Diakov
+				{{ $t('lastName') }}
 			</h2>
 		</div>
 	</header>
@@ -25,30 +33,70 @@
 <script>
 export default {
 	name: 'Header',
+	methods: {
+		isActive(route) {
+			console.log(route === this.$route.path)
+			return route === this.$route.path
+		},
+		isMinimized() {
+			return this.$route.path !== '/'
+		},
+	},
 }
 </script>
+
+<i18n>
+{
+	"en": {
+		"firstName": "Aleksandr",
+		"lastName": "Diakov",
+		"nav": {
+			"about": "About me",
+			"projects": "Projects",
+			"contact": "Contact",
+		}
+	},
+	"ru": {
+		"firstName": "Александр",
+		"lastName": "Дьяков",
+		"nav": {
+			"about": "Подробнее",
+			"projects": "Проекты",
+			"contact": "Контакты",
+		}
+	}
+}
+
+</i18n>
 
 <style>
 header {
 	z-index: 10;
 	position: sticky;
-	top: calc(100px - 100vh);
+	top: calc(100px - max(100vh, 800px));
 	background-color: var(--color-4);
 	color: var(--color-1);
-	/* padding: 1em; */
-	/* padding-bottom: 0; */
-	height: 100vh;
+	/* min-height: 100vh; */
+	height: max(100vh, 800px);
+	/* padding-bottom: 100px; */
 
 	font-weight: bold;
 	font-size: 1.5em;
+}
+
+header.minimized {
+	top: 0;
+	height: 100px;
+}
+
+header.minimized .title-container {
+	display: none;
 }
 
 .header-title {
 	padding: 0.5em 0.25em;
 	color: var(--color-5);
 	font-size: 6em;
-	/* margin: 10px; */
-	/* text-align: center; */
 }
 
 .header-title.left {
@@ -79,7 +127,6 @@ header {
 	display: flex;
 	place-items: center;
 	padding: 15px 20px;
-	/* transition: all 0.2s; */
 }
 
 .header-link-item:hover {
@@ -88,8 +135,11 @@ header {
 	height: 100px;
 }
 
+.header-link-active {
+	border-bottom: 5px solid var(--color-2);
+}
+
 .header-logo {
-	/* transform: scaleY(100%); */
 	width: 200px;
 	transition: all ease-in-out 0.2s;
 }
@@ -103,10 +153,6 @@ header {
 	animation-duration: 0.2s;
 	animation-iteration-count: 2;
 	animation-delay: 0.1s;
-}
-
-.header-link-active {
-	border-bottom: 5px solid var(--color-2);
 }
 
 @keyframes blink {

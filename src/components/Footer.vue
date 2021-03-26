@@ -1,9 +1,11 @@
 <template>
 	<footer>
 		<div class="container">
-			<h3 class="section-title"><router-link>Send me a message!</router-link></h3>
+			<h3 class="section-title">
+				<router-link to="/contact">{{ $t('message') }}</router-link>
+			</h3>
 			<div>
-				<p>Aleksandr Diakov</p>
+				<p>{{ $t('name') }}</p>
 				<p>2021</p>
 			</div>
 		</div>
@@ -13,12 +15,21 @@
 <script>
 export default {
 	name: 'Footer',
-	created() {
-		console.log(this.$language)
-		// console.log(this.$i18n.locale)
-	},
 }
 </script>
+
+<i18n>
+{
+	"en": {
+		"message": "Send me a message!",
+		"name": "Aleksandr Diakov"
+	},
+	"ru": {
+		"message": "Отправить сообщение",
+		"name": "Александр Дьяков"
+	}
+}
+</i18n>
 
 <style scoped>
 footer {
@@ -27,17 +38,16 @@ footer {
 	padding: 1rem;
 }
 
-router-link {
+a {
 	margin: 3rem 0;
 	background-color: var(--color-3);
 	padding: 2rem;
 	border-radius: 2rem;
 }
 
-/* router-link {
-	width: 100%;
-	height: 100%;
-} */
+a:hover {
+	color: var(--color-2);
+}
 
 div > div {
 	display: flex;

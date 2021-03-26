@@ -1,10 +1,9 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 
-import language from './utils/languageSwitch'
+import i18n from './i18n'
+import router from './router'
 
-const app = createApp(App)
-
-app.config.globalProperties.$language = language
-
-app.mount('#app')
+createApp(App).use(router)
+	.use(i18n)
+	.mount('#app')
