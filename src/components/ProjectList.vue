@@ -1,14 +1,24 @@
 <template>
 	<section class="container">
 		<h3 class="section-title">{{ $t('title') }}</h3>
-		<ProjectCard
-			v-for="(project, index) in list"
-			:key="index"
-			:description="project.description[this.$i18n.locale]"
-			:title="project.title[this.$i18n.locale]"
-			:img="project.img"
-			:links="project.links"
-		/>
+		<div v-if="errorMessage" class="error">
+			<h4>{{ errorMessage }}</h4>
+		</div>
+		<div class="preject-wrapper" v-if="isLoading">
+			<ProjectCard skeleton="{{true}}" />
+			<ProjectCard skeleton="{{true}}" />
+			<ProjectCard skeleton="{{true}}" />
+		</div>
+		<div class="preject-wrapper" v-else>
+			<ProjectCard
+				v-for="(project, index) in list"
+				:key="index"
+				:description="project.description"
+				:title="project.title"
+				:img="'http://localhost:1337' + project.img.url"
+				:links="project.links"
+			/>
+		</div>
 	</section>
 </template>
 
@@ -23,15 +33,20 @@ export default {
 		return {
 			list: null,
 			isLoading: true,
+			errorMessage: null,
 		}
 	},
-	//TODO add try/catch for errors
-	//TODO skeleton loader
 	async mounted() {
-		const res = await fetch('https://my-json-server.typicode.com/clydethecloud/portfolio-db-mock/db')
-		const data = await res.json()
-		this.list = data.data
-		this.isLoading = false
+		try {
+			const res = await fetch('http://localhost:1337/projects')
+			const data = await res.json()
+			this.list = data
+			this.isLoading = false
+		} catch (e) {
+			this.errorMessage = this.$t('fetchError')
+			console.log('Fetching went wrong')
+			console.log(e)
+		}
 	},
 }
 </script>
@@ -46,5 +61,3 @@ export default {
 	}
 }
 </i18n>
-
-<style></style>

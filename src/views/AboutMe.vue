@@ -1,8 +1,10 @@
 <template>
-	<About />
-	<MostRecentProject />
-	<SkillSet />
-	<Footer />
+	<div>
+		<About />
+		<MostRecentProject />
+		<SkillSet />
+		<Footer />
+	</div>
 </template>
 
 <script>

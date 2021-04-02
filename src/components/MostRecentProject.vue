@@ -2,7 +2,17 @@
 	<section>
 		<div class="container">
 			<h3 class="section-title">{{ $t('title') }}</h3>
-			<ProjectCard :title="title[this.$i18n.locale]" :img="img" :description="description[this.$i18n.locale]" :links="links" />
+			<div v-if="errorMessage" class="error">
+				<h4>{{ errorMessage }}</h4>
+			</div>
+			<ProjectCard v-if="isLoading" skeleton="{{true}}" />
+			<ProjectCard
+				v-else
+				:description="project.description"
+				:title="project.title"
+				:img="'http://localhost:1337' + project.img.url"
+				:links="project.links"
+			/>
 		</div>
 	</section>
 </template>
@@ -13,42 +23,25 @@ export default {
 	name: 'MostRecentProject',
 	data() {
 		return {
-			title: {
-				ru: 'Название',
-				en: 'Title',
-			},
-			img: 'https://clydethecloud.github.io/img/undertool-preview.png',
-			description: { ru: 'Описание проекта на русском языке', en: 'English description of a project' },
-			links: [
-				{
-					url: 'https://clydethecloud.github.io/',
-					type: 'github',
-					description: {
-						ru: 'Репозиторий',
-						en: 'GitHub',
-					},
-				},
-				{
-					url: 'https://clydethecloud.github.io/',
-					type: 'site',
-					description: {
-						ru: 'Сайт',
-						en: 'Site',
-					},
-				},
-				{
-					url: 'https://clydethecloud.github.io/',
-					type: 'site',
-					description: {
-						ru: 'Сайт',
-						en: 'Site',
-					},
-				},
-			],
+			project: null,
+			isLoading: true,
+			errorMessage: null,
 		}
 	},
 	components: {
 		ProjectCard,
+	},
+	async mounted() {
+		try {
+			const res = await fetch('http://localhost:1337/projects?_sort=id:DESC&_limit=1')
+			const data = await res.json()
+			this.project = data[0]
+			this.isLoading = false
+		} catch (e) {
+			this.errorMessage = this.$t('fetchError')
+			console.log('Fetching went wrong')
+			console.log(e)
+		}
 	},
 }
 </script>

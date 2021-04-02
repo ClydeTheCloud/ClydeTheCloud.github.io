@@ -24,8 +24,20 @@ const routes = [
 const router = createRouter({
 	history: createWebHashHistory(),
 	routes,
-	scrollBehavior() {
-		return { top: 0 }
+	scrollBehavior(to, from, savedPosition) {
+		if (savedPosition && from.name === undefined) {
+			return savedPosition
+		}
+		// If user goues to home page then scroll back to top immediately (need this for header unrolling animation)
+		if (to.path === '/') {
+			return { top: 0 }
+		}
+
+		return new Promise(resolve => {
+			setTimeout(() => {
+				resolve({ top: 0 })
+			}, 400)
+		})
 	},
 })
 

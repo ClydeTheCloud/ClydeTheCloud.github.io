@@ -35,11 +35,12 @@ export default {
 footer {
 	margin-top: 6rem;
 	background-color: var(--color-4);
-	padding: 1rem;
+	padding: 1rem 0;
 }
 
 a {
-	margin: 3rem 0;
+	display: inline-block;
+	/* margin: 3rem 0; */
 	background-color: var(--color-3);
 	padding: 2rem;
 	border-radius: 2rem;
@@ -49,8 +50,31 @@ a:hover {
 	color: var(--color-2);
 }
 
-div > div {
+.container > div {
 	display: flex;
 	justify-content: space-between;
+}
+
+@media (max-width: 1366px) {
+}
+@media (max-width: 768px) {
+	a {
+		padding: 1.5rem;
+	}
+	.section-title {
+		margin: 4rem 0;
+		font-size: 1.75em;
+	}
+}
+@media (max-width: 576px) {
+	a {
+		padding: 1rem;
+	}
+	.section-title {
+		margin: 3rem 0;
+		font-size: 1.25em;
+	}
+}
+@media (max-width: 360px) {
 }
 </style>

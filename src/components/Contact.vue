@@ -5,19 +5,21 @@
 			<h3 class="section-title">
 				{{ $t('title') }}
 			</h3>
-			<form>
-				<!-- TODO add jsmail -->
+			<form @submit.prevent="onSubmit">
 				<label>
 					{{ $t('form.name') }} <br />
-					<input type="text" />
+					<p :class="['error', { 'error-hidden': isNameInvalid }]">{{ errors.name }}</p>
+					<input @input="this.errors.name = ''" type="text" v-model.trim="name" />
 				</label>
 				<label>
 					{{ $t('form.email') }} <br />
-					<input type="email" />
+					<p :class="['error', { 'error-hidden': isEmailInvalid }]">{{ errors.email }}</p>
+					<input @input="this.errors.email = ''" type="email" v-model.trim="email" />
 				</label>
 				<label>
 					{{ $t('form.message') }} <br />
-					<textarea></textarea>
+					<p :class="['error', { 'error-hidden': isMessageInvalid }]">{{ errors.message }}</p>
+					<textarea @input="this.errors.message = ''" v-model.trim="message"></textarea>
 				</label>
 				<button>{{ $t('form.submit') }}</button>
 			</form>
@@ -53,6 +55,64 @@
 <script>
 export default {
 	name: 'ContactComponent',
+	data() {
+		return {
+			name: '',
+			email: '',
+			message: '',
+			errors: {
+				name: '',
+				email: '',
+				message: '',
+			},
+		}
+	},
+	methods: {
+		onSubmit() {
+			const nameRegex = /^([ \p{L}\\-])+$/giu
+			const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+			// validate name input
+			if (this.name.length < 2 || this.name.length > 14) {
+				this.errors.name = this.$t('errors.name.length')
+			} else if (!nameRegex.test(this.name)) {
+				console.log(this.name)
+				this.errors.name = this.$t('errors.name.characters')
+			}
+			// validate email input
+			else if (!emailRegex.test(this.email)) {
+				this.errors.email = this.$t('errors.email')
+			}
+
+			// validate message input
+			else if (this.message.length < 10) {
+				this.errors.message = this.$t('errors.message')
+			}
+
+			// return if there's any active errors
+			if (this.errors.name || this.errors.email || this.errors.message) {
+				return
+				// return if the form is empty
+			} else if (!this.name || !this.email || !this.message) {
+				return
+			}
+
+			// Code for sending message
+			console.log('name: ' + this.name)
+			console.log('email: ' + this.email)
+			console.log('message: ' + this.message)
+		},
+	},
+	computed: {
+		isNameInvalid() {
+			return this.errors.name === ''
+		},
+		isEmailInvalid() {
+			return this.errors.email === ''
+		},
+		isMessageInvalid() {
+			return this.errors.message === ''
+		},
+	},
 }
 </script>
 
@@ -68,7 +128,15 @@ export default {
 			"submit": "Submit"
 		},
 		"direct": "Contact me directly:",
-		"social-media": "Or get in touch on social media:"
+		"social-media": "Or get in touch on social media:",
+		"errors": {
+			"name": {
+				"length": "Min length 2, max length 14.",
+				"characters": "Invalid characters in name. Only letters, spaces and dashes are allowed."
+			},
+			"email": "Invalid email adress.",
+			"message": "10 characters minimum."
+		}
 	},
 	"ru": {
 		"hidden-title": "Контактная информация:",
@@ -79,8 +147,16 @@ export default {
 			"message":"Ваше сообщение",
 			"submit": "Отправить"
 		},
-		"direct": "Свяжитесь напрямую",
-		"social-media": "Или через социальные сети:"
+		"direct": "Свяжитесь напрямую:",
+		"social-media": "Или через социальные сети:",
+				"errors": {
+			"name": {
+				"length": "Минимум 2 символа, максимум 14.",
+				"characters": "Недопустимое имя. Разрешены только буквы, пробелы и тире."
+			},
+			"email": "Недопустимый почтовый адресс.",
+			"message": "Минимум 10 символов."
+		}
 	}
 }
 </i18n>
@@ -119,7 +195,7 @@ form button {
 	padding: 0.5em;
 	margin: 0 auto;
 	margin-top: 1em;
-	width: 5em;
+	min-width: 5em;
 	font-size: 2rem;
 	font-weight: bold;
 	border-radius: 5px;
@@ -131,6 +207,16 @@ form button {
 
 form button:hover {
 	color: var(--color-2);
+}
+
+form .error {
+	margin: 1em 0;
+	font-size: 1rem;
+	padding: 1em;
+}
+
+.error-hidden {
+	display: none;
 }
 
 .email {

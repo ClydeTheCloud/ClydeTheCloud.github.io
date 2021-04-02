@@ -67,4 +67,23 @@ export default {
 	transform: translateY(-10px);
 	color: var(--color-2);
 }
+
+@media (max-width: 768px) {
+	.tag {
+		font-size: 2rem;
+		padding: 0.75rem;
+	}
+}
+@media (max-width: 576px) {
+	.tag {
+		margin: 10px 10px;
+		font-size: 1.25rem;
+	}
+}
+@media (max-width: 360px) {
+	.tag {
+		margin: 5px 5px;
+		font-size: 1.15rem;
+	}
+}
 </style>

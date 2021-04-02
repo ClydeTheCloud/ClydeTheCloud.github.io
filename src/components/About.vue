@@ -7,7 +7,7 @@
 				<img class="photo" src="../assets/avatar.png" alt="My photo" />
 				<p class="description">
 					{{ $t('description.part1') }}<br />
-					{{ $t('description.part2') }}<br />
+					{{ $t('description.part2') }}
 					{{ $t('description.part3') }}
 				</p>
 			</div>
@@ -51,7 +51,30 @@ export default {
 }
 
 .about-wrapper .description {
+	text-align: justify;
 	margin-top: 100px;
 	font-size: 1.75rem;
+}
+
+@media (max-width: 768px) {
+	.photo {
+		height: 200px;
+		margin-right: 1.5rem;
+	}
+	.about-wrapper .description {
+		margin-top: 50px;
+		font-size: 1.5rem;
+	}
+}
+
+@media (max-width: 576px) {
+	.photo {
+		height: 80px;
+		margin-right: 1rem;
+	}
+	.about-wrapper .description {
+		margin-top: 50px;
+		font-size: 1.15rem;
+	}
 }
 </style>
