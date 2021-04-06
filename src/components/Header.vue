@@ -34,6 +34,7 @@
 						>{{ $t('nav.contact') }}</router-link
 					>
 				</nav>
+				<LanguageSwitcher />
 			</div>
 		</div>
 		<div class="title-container">
@@ -50,6 +51,8 @@
 </template>
 
 <script>
+import LanguageSwitcher from './LanguageSwitcher'
+
 export default {
 	name: 'Header',
 	methods: {
@@ -68,6 +71,9 @@ export default {
 			// for mobile layout
 			isSideMenuOpen: false,
 		}
+	},
+	components: {
+		LanguageSwitcher,
 	},
 }
 </script>

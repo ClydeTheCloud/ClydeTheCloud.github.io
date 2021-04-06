@@ -37,6 +37,8 @@ input[type='checkbox'] {
 	right: 25px;
 	top: 25px;
 	user-select: none;
+	color: var(--color-5);
+	font-size: 0.95rem;
 }
 
 .switch-label {
@@ -87,17 +89,30 @@ input[type='checkbox'] {
 	background-color: var(--color-1);
 }
 
-.switcher {
-	padding: 10px;
-	color: var(--color-5);
-	background-color: var(--color-2);
-	font-size: 20px;
-	border: none;
-	position: fixed;
-	right: 25px;
-	top: 25px;
-	z-index: 11;
-	border-radius: 10px;
-	cursor: pointer;
+@media (max-width: 1366px) {
+	.switch {
+		right: 15px;
+		top: 15px;
+		transform-origin: right top;
+		transform: scale(0.8);
+	}
+}
+
+@media (max-width: 768px) {
+	.switch {
+		right: 10px;
+		top: 10px;
+	}
+}
+
+@media (max-width: 576px) {
+	.switch {
+		position: absolute;
+		top: initial;
+		right: initial;
+		left: 50%;
+		bottom: 25px;
+		transform: translateX(-50%);
+	}
 }
 </style>

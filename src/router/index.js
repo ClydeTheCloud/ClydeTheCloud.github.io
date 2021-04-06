@@ -41,4 +41,8 @@ const router = createRouter({
 	},
 })
 
+router.afterEach(to => {
+	document.title = 'Aleksandr Diakov - ' + to.name
+})
+
 export default router

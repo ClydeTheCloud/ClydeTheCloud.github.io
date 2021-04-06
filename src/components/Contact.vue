@@ -1,24 +1,28 @@
 <template>
 	<section class="container">
 		<h2 class="hidden">{{ $t('hidden-title') }}</h2>
+
 		<div class="contact-block">
 			<h3 class="section-title">
 				{{ $t('title') }}
 			</h3>
+			<div v-if="notification.text" class="notification" :class="notification.status">
+				<h4>{{ notification.text }}</h4>
+			</div>
 			<form @submit.prevent="onSubmit">
 				<label>
 					{{ $t('form.name') }} <br />
-					<p :class="['error', { 'error-hidden': isNameInvalid }]">{{ errors.name }}</p>
+					<p :class="['notification error', { 'error-hidden': isNameInvalid }]">{{ errors.name }}</p>
 					<input @input="this.errors.name = ''" type="text" v-model.trim="name" />
 				</label>
 				<label>
 					{{ $t('form.email') }} <br />
-					<p :class="['error', { 'error-hidden': isEmailInvalid }]">{{ errors.email }}</p>
+					<p :class="['notification error', { 'error-hidden': isEmailInvalid }]">{{ errors.email }}</p>
 					<input @input="this.errors.email = ''" type="email" v-model.trim="email" />
 				</label>
 				<label>
 					{{ $t('form.message') }} <br />
-					<p :class="['error', { 'error-hidden': isMessageInvalid }]">{{ errors.message }}</p>
+					<p :class="['notification error', { 'error-hidden': isMessageInvalid }]">{{ errors.message }}</p>
 					<textarea @input="this.errors.message = ''" v-model.trim="message"></textarea>
 				</label>
 				<button>{{ $t('form.submit') }}</button>
@@ -65,10 +69,14 @@ export default {
 				email: '',
 				message: '',
 			},
+			notification: {
+				text: '',
+				status: '',
+			},
 		}
 	},
 	methods: {
-		onSubmit() {
+		async onSubmit() {
 			const nameRegex = /^([ \p{L}\\-])+$/giu
 			const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 			// validate name input
@@ -96,10 +104,35 @@ export default {
 				return
 			}
 
-			// Code for sending message
-			console.log('name: ' + this.name)
-			console.log('email: ' + this.email)
-			console.log('message: ' + this.message)
+			const res = await fetch('http://localhost:1337/contact-form-messages/', {
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+				},
+				method: 'POST',
+				body: JSON.stringify({
+					name: this.name,
+					email: this.email,
+					message: this.message,
+				}),
+			})
+			console.log(res)
+			if (res.status === 200) {
+				this.setNotification(this.$t('notification.success'), 'success')
+				this.name = ''
+				this.email = ''
+				this.message = ''
+			} else {
+				this.setNotification(`${this.$t('notification.error')}: ${res.status} - ${res.statusText}`, 'error')
+				console.log(res.status, res.statusText)
+			}
+		},
+		setNotification(text, status) {
+			this.notification = { text, status }
+			setTimeout(() => {
+				this.notification.status = ''
+				this.notification.text = ''
+			}, 5000)
 		},
 	},
 	computed: {
@@ -136,6 +169,10 @@ export default {
 			},
 			"email": "Invalid email adress.",
 			"message": "10 characters minimum."
+		},
+		"notification": {
+			"success": "Your message was sent successfully.",
+			"error": "Something went wrong"
 		}
 	},
 	"ru": {
@@ -156,6 +193,10 @@ export default {
 			},
 			"email": "Недопустимый почтовый адресс.",
 			"message": "Минимум 10 символов."
+		},
+		"notification": {
+			"success": "Ваше сообщение успешно отправленно.",
+			"error": "Что-то пошло не так"
 		}
 	}
 }
@@ -164,20 +205,20 @@ export default {
 <style>
 form {
 	margin: 0 auto;
-	padding: 50px;
+	padding: 40px;
 	max-width: 600px;
 	background-color: var(--color-2);
 	color: var(--color-5);
 	border-radius: 25px;
 	font-weight: bold;
-	font-size: 1.5em;
+	font-size: 1.35em;
 }
 
 input,
 textarea {
 	display: block;
 	width: 100%;
-	margin: 0.5em 0;
+	margin: 0.35em 0;
 	padding: 5px;
 	font-size: 24px;
 	border-radius: 5px;
@@ -196,7 +237,7 @@ form button {
 	margin: 0 auto;
 	margin-top: 1em;
 	min-width: 5em;
-	font-size: 2rem;
+	font-size: 1.25em;
 	font-weight: bold;
 	border-radius: 5px;
 	border: none;
@@ -253,4 +294,56 @@ form .error {
 	width: 3rem;
 	height: 3rem;
 }
+
+@media (max-width: 768px) {
+	form {
+		padding: 35px;
+		font-size: 1.25em;
+	}
+
+	.email {
+		font-size: 3rem;
+	}
+}
+
+@media (max-width: 576px) {
+	form {
+		padding: 25px;
+		font-size: 1em;
+	}
+
+	.email {
+		font-size: 2rem;
+	}
+
+	.contact-links {
+		margin: 4em auto;
+	}
+}
+
+@media (max-width: 360px) {
+	.email {
+		font-size: 1.5rem;
+	}
+
+	.contact-links {
+		margin: 3em auto;
+	}
+
+	.contact-links a {
+		padding: 1rem;
+		width: 4rem;
+		height: 4rem;
+	}
+
+	.contact-links img {
+		width: 2rem;
+		height: 2rem;
+	}
+}
+
+/* @media (max-width: 1366px) {}
+@media (max-width: 768px) {}
+@media (max-width: 576px) {}
+@media (max-width: 360px) {} */
 </style>

@@ -1,6 +1,5 @@
 <template>
 	<Header />
-	<LanguageSwitcher />
 	<router-view v-slot="{ Component }">
 		<transition name="slide" mode="out-in">
 			<component :is="Component"></component>
@@ -10,13 +9,11 @@
 
 <script>
 import Header from './components/Header'
-import LanguageSwitcher from './components/LanguageSwitcher'
 
 export default {
 	name: 'App',
 	components: {
 		Header,
-		LanguageSwitcher,
 	},
 }
 </script>
@@ -68,13 +65,21 @@ a {
 	font-size: 3em;
 }
 
-.error {
+.notification {
 	text-align: center;
-	background-color: red;
 	color: white;
 	padding: 1em;
 	font-size: 2rem;
 	border-radius: 25px;
+	margin: 1rem 0;
+}
+
+.error {
+	background-color: red;
+}
+
+.success {
+	background-color: green;
 }
 
 /* Transition animation */
@@ -100,17 +105,17 @@ a {
 
 @media (max-width: 1366px) {
 	.container {
-		width: 750px;
+		width: min(700px, calc(100vw - 80px));
 	}
 
-	.error {
+	.notification {
 		font-size: 1.75rem;
 	}
 }
 
 @media (max-width: 768px) {
 	.container {
-		width: 90%;
+		width: min(700px, calc(100vw - 120px));
 		padding: 0 1.25em;
 	}
 
@@ -119,7 +124,7 @@ a {
 		font-size: 2.5em;
 	}
 
-	.error {
+	.notification {
 		padding: 0.75em;
 		font-size: 1.5rem;
 	}
@@ -127,6 +132,7 @@ a {
 
 @media (max-width: 576px) {
 	.container {
+		width: 90%;
 		padding: 0 1em;
 	}
 
@@ -135,7 +141,7 @@ a {
 		font-size: 2em;
 	}
 
-	.error {
+	.notification {
 		font-size: 1rem;
 	}
 }
@@ -147,7 +153,7 @@ a {
 	}
 
 	.section-title {
-		margin: 2rem 0;
+		margin: 3rem 0;
 		font-size: 1.5em;
 	}
 }

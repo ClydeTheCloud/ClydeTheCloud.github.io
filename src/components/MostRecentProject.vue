@@ -2,7 +2,7 @@
 	<section>
 		<div class="container">
 			<h3 class="section-title">{{ $t('title') }}</h3>
-			<div v-if="errorMessage" class="error">
+			<div v-if="errorMessage" class="notification error">
 				<h4>{{ errorMessage }}</h4>
 			</div>
 			<ProjectCard v-if="isLoading" skeleton="{{true}}" />
