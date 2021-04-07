@@ -15,7 +15,7 @@
 				:key="index"
 				:description="project.description"
 				:title="project.title"
-				:img="'http://localhost:1337' + project.img.url"
+				:img="project.img.url"
 				:links="project.links"
 			/>
 		</div>
@@ -38,7 +38,7 @@ export default {
 	},
 	async mounted() {
 		try {
-			const res = await fetch('http://localhost:1337/projects')
+			const res = await fetch(`${this.$API}/projects`)
 			const data = await res.json()
 			this.list = data
 			this.isLoading = false

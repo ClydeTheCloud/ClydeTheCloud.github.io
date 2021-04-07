@@ -10,7 +10,7 @@
 				v-else
 				:description="project.description"
 				:title="project.title"
-				:img="'http://localhost:1337' + project.img.url"
+				:img="project.img.url"
 				:links="project.links"
 			/>
 		</div>
@@ -33,9 +33,10 @@ export default {
 	},
 	async mounted() {
 		try {
-			const res = await fetch('http://localhost:1337/projects?_sort=id:DESC&_limit=1')
+			const res = await fetch(`${this.$API}/projects?_sort=id:DESC&_limit=1`)
 			const data = await res.json()
 			this.project = data[0]
+			console.log(this.project)
 			this.isLoading = false
 		} catch (e) {
 			this.errorMessage = this.$t('fetchError')

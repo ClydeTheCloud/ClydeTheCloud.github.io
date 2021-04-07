@@ -104,7 +104,7 @@ export default {
 				return
 			}
 
-			const res = await fetch('http://localhost:1337/contact-form-messages/', {
+			const res = await fetch(`${this.$API}/contact-form-messages/`, {
 				headers: {
 					Accept: 'application/json',
 					'Content-Type': 'application/json',
