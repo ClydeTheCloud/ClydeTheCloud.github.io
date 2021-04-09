@@ -46,8 +46,14 @@ a {
 	border-radius: 2rem;
 }
 
-a:hover {
+a:hover,
+a:focus {
 	color: var(--color-2);
+	box-shadow: 0px 0px 10px 3px rgba(255, 255, 255, 0.1);
+}
+
+a:focus {
+	outline: none;
 }
 
 .container > div {

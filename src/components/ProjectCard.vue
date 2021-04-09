@@ -25,7 +25,7 @@
 				<p>{{ description[this.$i18n.locale] }}</p>
 			</div>
 			<div class="links">
-				<a v-for="(link, index) in links" :key="index" :href="link.url">
+				<a v-for="(link, index) in links" target="_blank" rel="noopener noreferrer" :key="index" :href="link.url">
 					<component :is="link.type" :description="link.description" />
 				</a>
 			</div>
@@ -163,6 +163,10 @@ export default {
 .card .link-item:hover,
 .card a:focus .link-item {
 	background-color: rgba(255, 255, 255, 0.9);
+}
+
+.card a:focus {
+	outline: none;
 }
 
 .card .link-item > img {

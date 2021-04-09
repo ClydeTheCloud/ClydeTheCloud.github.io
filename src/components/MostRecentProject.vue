@@ -3,7 +3,7 @@
 		<div class="container">
 			<h3 class="section-title">{{ $t('title') }}</h3>
 			<div v-if="errorMessage" class="notification error">
-				<h4>{{ errorMessage }}</h4>
+				<p>{{ errorMessage }}</p>
 			</div>
 			<ProjectCard v-if="isLoading" skeleton="{{true}}" />
 			<ProjectCard
@@ -36,7 +36,6 @@ export default {
 			const res = await fetch(`${this.$API}/projects?_sort=id:DESC&_limit=1`)
 			const data = await res.json()
 			this.project = data[0]
-			console.log(this.project)
 			this.isLoading = false
 		} catch (e) {
 			this.errorMessage = this.$t('fetchError')

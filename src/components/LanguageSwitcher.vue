@@ -28,7 +28,11 @@ export default {
 
 <style scoped>
 input[type='checkbox'] {
-	display: none;
+	position: absolute;
+	clip: rect(0 0 0 0);
+	width: 1px;
+	height: 1px;
+	margin: -1px;
 }
 
 .switch {
@@ -39,6 +43,11 @@ input[type='checkbox'] {
 	user-select: none;
 	color: var(--color-5);
 	font-size: 0.95rem;
+	border-radius: 10px;
+}
+
+.switch:focus-within {
+	box-shadow: 0px 0px 10px 10px rgba(255, 255, 255, 0.3);
 }
 
 .switch-label {
@@ -111,7 +120,7 @@ input[type='checkbox'] {
 		top: initial;
 		right: initial;
 		left: 50%;
-		bottom: 25px;
+		bottom: 25%;
 		transform: translateX(-50%);
 	}
 }

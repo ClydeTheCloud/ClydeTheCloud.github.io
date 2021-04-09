@@ -7,7 +7,7 @@
 				{{ $t('title') }}
 			</h3>
 			<div v-if="notification.text" class="notification" :class="notification.status">
-				<h4>{{ notification.text }}</h4>
+				<p>{{ notification.text }}</p>
 			</div>
 			<form @submit.prevent="onSubmit">
 				<label>
@@ -39,14 +39,16 @@
 		<div class="contact-block">
 			<h3 class="section-title">{{ $t('social-media') }}</h3>
 			<div class="contact-links">
-				<a href="https://github.com/clydethecloud/" class="contact-link-item">
+				<a href="https://github.com/clydethecloud/" target="_blank" rel="noopener noreferrer" class="contact-link-item">
 					<img src="../assets/icons/github.svg" alt="GitHub" />
 				</a>
-				<a href="https://www.reddit.com/user/d_ke" class="contact-link-item">
+				<a href="https://www.reddit.com/user/d_ke" target="_blank" rel="noopener noreferrer" class="contact-link-item">
 					<img src="../assets/icons/reddit.svg" alt="Reddit" />
 				</a>
 				<a
 					href="https://www.linkedin.com/in/%D0%B0%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%80-%D0%B4%D1%8C%D1%8F%D0%BA%D0%BE%D0%B2-8a01b920a/"
+					target="_blank"
+					rel="noopener noreferrer"
 					class="contact-link-item"
 				>
 					<img src="../assets/icons/linkedin.svg" alt="LinkedIn" />
@@ -267,8 +269,13 @@ form .error {
 	transition: all 0.2s;
 }
 
-.email:hover {
+.email:hover,
+.email:focus {
 	color: var(--color-2);
+}
+
+.email:focus {
+	outline: none;
 }
 
 .contact-links {
@@ -286,8 +293,13 @@ form .error {
 	height: 5rem;
 }
 
-.contact-links a:hover {
+.contact-links a:hover,
+.contact-links a:focus {
 	background-color: var(--color-2);
+}
+
+.contact-links a:focus {
+	outline: none;
 }
 
 .contact-links img {

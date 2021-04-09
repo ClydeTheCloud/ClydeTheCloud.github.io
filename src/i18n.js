@@ -32,6 +32,6 @@ function loadLocaleMessages() {
 export default createI18n({
 	legacy: true,
 	locale: getStartingLocale() || 'en',
-	fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'en',
+	fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'ru',
 	messages: loadLocaleMessages(),
 })

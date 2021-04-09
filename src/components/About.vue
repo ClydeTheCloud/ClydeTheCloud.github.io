@@ -1,7 +1,6 @@
 <template>
 	<section>
 		<div class="container">
-			<!-- <h1 class="hidden">Aleksandr Diakov - web developer</h1> -->
 			<h2 class="section-title">{{ $t('wellcome') }}</h2>
 			<div class="about-wrapper">
 				<img class="photo" src="../assets/avatar.png" alt="My photo" />
@@ -9,6 +8,7 @@
 					{{ $t('description.part1') }}<br />
 					{{ $t('description.part2') }}
 					{{ $t('description.part3') }}
+					{{ $t('description.part4') }}
 				</p>
 			</div>
 		</div>
@@ -28,7 +28,8 @@ export default {
 		"description": {
 			"part1": "Nice seeing you here!",
 			"part2": "Let me introduce myself:",
-			"part3": "My name is Aleksandr and I am a web developer from Russia. I've been studing fullstack web development since October of 2019. I am self-taught and relatively beginner: no commercial experience yet, although I have a few projects I've done for myself. I love to discover new web-tech and always eager to learn something new."
+			"part3": "My name is Aleksandr and I am a web developer from Russia, Saint Petersburg. I've been studing fullstack web development since October of 2019, though i lean more toward the frontend. I am self-taught and relatively beginner: no commercial experience yet, although I have a few projects I've done for myself. I love to discover new web-tech and always eager to learn something new.",
+			"part4": "I am currently available for work, both longterm and freelance. Hit me up if you want to discuss anything!"
 		}
 	},
 	"ru": {
@@ -36,7 +37,8 @@ export default {
 		"description": {
 			"part1": "Рад тебя здесь видеть!",
 			"part2": "Позволь представиться:",
-			"part3": "Меня зовут Александр и я веб-разработчик из России. Я изучаю fullstack разработку примерно с Октября 2019го года. Я самоучка и меня можно назвать начинающим: опыта коммерческой разработки у меня пока нет, зато есть несколько личных проектов. Мне нравится открывать для себя новые веб-технологии и я всегда стремлюсь научиться чему-то новому."
+			"part3": "Меня зовут Александр и я веб-разработчик из Санкт-Петербурга. Я изучаю fullstack разработку примерно с Октября 2019го года, с уклоном во frontend. Я самоучка и меня можно назвать начинающим: опыта коммерческой разработки у меня пока нет, зато есть несколько личных проектов. Мне нравится открывать для себя новые веб-технологии и я всегда стремлюсь научиться чему-то новому.",
+			"part4": "В данный момент я в поиске работы, готов рассмотреть как постоянное трудоустройство, так и подработку. Напишите мне, если хотите что-либо обсудить!"
 		}
 	}
 }

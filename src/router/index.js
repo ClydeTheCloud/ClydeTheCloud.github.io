@@ -25,12 +25,16 @@ const router = createRouter({
 	history: createWebHistory(),
 	routes,
 	scrollBehavior(to, from, savedPosition) {
+		if (to.path !== '/') {
+			console.log("Ignore the 404-error, it is caused by vue-router's history mode working on github pages")
+		}
+
 		if (savedPosition && from.name === undefined) {
 			return savedPosition
 		}
-		// If user goues to home page then scroll back to top immediately (need this for header unrolling animation)
+		// If user goes to home page then scroll back to top immediately (need this for header unrolling animation)
 		if (to.path === '/') {
-			return { top: 0 }
+			return { top: 0, behavior: 'smooth' }
 		}
 
 		return new Promise(resolve => {

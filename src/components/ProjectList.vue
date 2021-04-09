@@ -1,8 +1,8 @@
 <template>
 	<section class="container">
-		<h3 class="section-title">{{ $t('title') }}</h3>
+		<h2 class="section-title">{{ $t('title') }}</h2>
 		<div v-if="errorMessage" class="notification error">
-			<h4>{{ errorMessage }}</h4>
+			<p>{{ errorMessage }}</p>
 		</div>
 		<div class="preject-wrapper" v-if="isLoading">
 			<ProjectCard skeleton="{{true}}" />
@@ -40,7 +40,7 @@ export default {
 		try {
 			const res = await fetch(`${this.$API}/projects`)
 			const data = await res.json()
-			this.list = data
+			this.list = data.reverse()
 			this.isLoading = false
 		} catch (e) {
 			this.errorMessage = this.$t('fetchError')

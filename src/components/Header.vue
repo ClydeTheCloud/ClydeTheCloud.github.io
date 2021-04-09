@@ -1,9 +1,10 @@
 <template>
 	<header :class="{ minimized: isMinimized() }">
+		<h1 class="hidden">{{ $t('hiddenHeader') }}</h1>
 		<div class="title-container">
-			<h2 class="header-title left">
+			<p class="header-title left">
 				{{ $t('firstName') }}
-			</h2>
+			</p>
 		</div>
 		<div class="container header-wrapper">
 			<img class="header-logo" src="../assets/logo.svg" alt="Logo" />
@@ -36,11 +37,16 @@
 				</nav>
 				<LanguageSwitcher />
 			</div>
+			<div
+				@click="this.isSideMenuOpen = false"
+				:class="{ 'sidemenu-close-on-click__open': this.isSideMenuOpen }"
+				class="sidemenu-close-on-click"
+			></div>
 		</div>
 		<div class="title-container">
-			<h2 class="header-title right">
+			<p class="header-title right">
 				{{ $t('lastName') }}
-			</h2>
+			</p>
 		</div>
 		<button @click="toggleSideMenu" :class="{ 'menu-button__open': this.isSideMenuOpen }" class="menu-button">
 			<div class="burger-slice"></div>
@@ -87,7 +93,8 @@ export default {
 			"about": "About me",
 			"projects": "Projects",
 			"contact": "Contact",
-		}
+		},
+		"hiddenHeader": "I'm a junior web-developer looking for work."
 	},
 	"ru": {
 		"firstName": "Александр",
@@ -96,7 +103,8 @@ export default {
 			"about": "Подробнее",
 			"projects": "Проекты",
 			"contact": "Контакты",
-		}
+		},
+		"hiddenHeader": "Я начинающий веб-разработчик, в поисках работы."
 	}
 }
 
@@ -171,10 +179,15 @@ header.minimized .title-container {
 	padding: 15px 20px;
 }
 
-.header-link-item:hover {
+.header-link-item:hover,
+.header-link-item:focus {
 	background-color: var(--color-3);
 	top: -12.5px;
 	height: 100px;
+}
+
+.header-link-item:focus {
+	outline: none;
 }
 
 .header-link-active {
@@ -196,6 +209,10 @@ header.minimized .title-container {
 }
 
 .menu-button {
+	display: none;
+}
+
+.sidemenu-close-on-click {
 	display: none;
 }
 
@@ -272,7 +289,8 @@ header.minimized .title-container {
 		width: 80%;
 	}
 
-	.header-link-item:hover {
+	.header-link-item:hover,
+	.header-link-item:focus {
 		top: 0;
 		height: initial;
 	}
@@ -331,8 +349,23 @@ header.minimized .title-container {
 		border-right: solid 5px var(--color-1);
 	}
 
+	.sidemenu-close-on-click {
+		display: block;
+		z-index: 15;
+		position: fixed;
+		top: 0;
+		right: 100vw;
+		height: 100vh;
+		width: calc(100vw - 200px);
+		transition: all 0.2s;
+	}
+
 	.sidemenu-wrapper__open {
 		left: 0;
+	}
+
+	.sidemenu-close-on-click__open {
+		right: 0;
 	}
 
 	.header-wrapper {

@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build and fix 404": "vue-cli-service build && cd dist && cp index.html 404.html",
+    "git-dev": "git add -- . \":!dist\" && git commit -m \"$MSG\" && git push",
+    "git-prod": "git add dist && git commit -m \"$MSG\" && git push",
+    "deploy": "npm run build and fix 404 && npm run git-prod",
     "lint": "vue-cli-service lint",
     "i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\""
   },
