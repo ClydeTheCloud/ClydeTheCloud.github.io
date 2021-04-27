@@ -94,7 +94,7 @@ export default {
 			"projects": "Projects",
 			"contact": "Contact",
 		},
-		"hiddenHeader": "I'm a junior web-developer looking for work."
+		"hiddenHeader": "I'm a junior web developer looking for work."
 	},
 	"ru": {
 		"firstName": "Александр",

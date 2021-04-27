@@ -10,17 +10,6 @@
 <script>
 import Header from './components/Header'
 
-// focus state на кнопках и ссылках
-// поднять немного свитч для языка на мобильной раскладке
-// открытие ссылок из проектов в новых вкладках
-// анимация бг? может быть
-//TODO GHpages deployment pipeline
-//TODO Сменить фото
-// Z-index - сайдбар попадает под carditem
-// Закрытие сайдбара при клике на пустое место
-// проверить семантику
-// порядок проектов в ProjectList
-
 export default {
 	name: 'App',
 	components: {

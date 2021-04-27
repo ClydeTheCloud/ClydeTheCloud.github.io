@@ -167,7 +167,7 @@ export default {
 		"errors": {
 			"name": {
 				"length": "Min length 2, max length 14.",
-				"characters": "Invalid characters in name. Only letters, spaces and dashes are allowed."
+				"characters": "Invalid characters in name. Only letters, spaces, and dashes are allowed."
 			},
 			"email": "Invalid email adress.",
 			"message": "10 characters minimum."

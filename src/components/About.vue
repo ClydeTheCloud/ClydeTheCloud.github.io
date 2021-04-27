@@ -1,7 +1,7 @@
 <template>
 	<section>
 		<div class="container">
-			<h2 class="section-title">{{ $t('wellcome') }}</h2>
+			<h2 class="section-title">{{ $t('welcome') }}</h2>
 			<div class="about-wrapper">
 				<img class="photo" src="../assets/avatar.png" alt="My photo" />
 				<p class="description">
@@ -24,12 +24,12 @@ export default {
 <i18n>
 {
 	"en": {
-		"wellcome": "Hello and wellcome!",
+		"welcome": "Hello and welcome!",
 		"description": {
 			"part1": "Nice seeing you here!",
 			"part2": "Let me introduce myself:",
-			"part3": "My name is Aleksandr and I am a web developer from Russia, Saint Petersburg. I've been studing fullstack web development since October of 2019, though i lean more toward the frontend. I am self-taught and relatively beginner: no commercial experience yet, although I have a few projects I've done for myself. I love to discover new web-tech and always eager to learn something new.",
-			"part4": "I am currently available for work, both longterm and freelance. Hit me up if you want to discuss anything!"
+			"part3": "My name is Aleksandr and I am a web developer from Russia, Saint Petersburg. I've been studying full-stack web development since October of 2019, though I lean more toward the frontend. I am self-taught and relatively beginner: no commercial experience yet, although I have a few projects I've done for myself. I love to discover new web-tech and always eager to learn something new.",
+			"part4": "I am currently available for work, both fulltime and freelance. Hit me up if you want to discuss anything!"
 		}
 	},
 	"ru": {
